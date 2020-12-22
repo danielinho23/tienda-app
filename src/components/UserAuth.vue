@@ -41,7 +41,7 @@ export default {
     methods: {
         processAuthUser: function(){
             var self = this
-            axios.post("http://127.0.0.1:8000/usuario/autentication/", self.user_in,  {headers: {}})
+            axios.post("https://tienda-app23.herokuapp.com/usuario/autentication/", self.user_in,  {headers: {}})
                 .then((result) => {
                     alert("Autenticación Exitosa");
                     self.$emit('log-in', self.user_in.username)
