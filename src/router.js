@@ -36,7 +36,7 @@ const router = new vueRouter({
         },
 */
         {
-            path: '/user/product/:product',
+            path: '/user/product/',
             name: "user_product2",
             component: UserProduct
         },

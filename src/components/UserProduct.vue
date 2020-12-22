@@ -1,38 +1,71 @@
 <template>
-    <div id="UserProduct" class="user_product2">
-        <h2> ID:<span> {{product}}  </span> </h2>
-        <h2>Tu producto es: <span> {{name}}  </span> </h2>
-        <h2>Precio: <span> {{price}} COP </span> </h2>
-        <h2>Oferta: <span> {{is_offer}}</span> </h2>
-        
+
+    <div>
+
+            <body>
+            <div id="UserProduct" class="user_product2">
+            <h2>Tu producto es: <span> {{name}}  </span> </h2>
+            <h2>Precio: <span> {{price}} COP </span> </h2>
+            <h2>Oferta: <span> {{is_offer}}</span> </h2>
+            </div>
+
+            <h2> Consulta Producto </h2>
+            
+                <div>
+                    <label for="name">ID</label>
+                    <input type="text" class="form-control" id="ID" placeholder="Product ID" v-model="form.name">
+                </div>
+
+            <button v-on:click="viewproduct">Ver Producto</button>
+            </body>  
+            
+
+
     </div>
+
 </template>
 
 <script>
 import axios from 'axios';
+
 export default {
-    name: 'UserProduct',
-    data: function (){
-        return {
-            product: "",
-            name:"",
-            price:"",
-            is_offer:"",
+    name: 'PostFormAxios',
+    data(){
+        return{
+            form: {
+                name: '',
+                email: '',
+                gender: '',
+                refer: '',
+                profession: [],
+                message: '',
+                satisfaction: '5',
+                interested: [],
+                terms: false
+            }
         }
     },
 
-    created: function(){
-        this.product = this.$route.params.product
-        let self = this
-        axios.get("http://127.0.0.1:8000/producto/" + this.product)
-            .then((result) => {
-                self.name = result.data.name
-                self.price = result.data.price
-                self.is_offer = result.data.is_offer
-            })
-            .catch((error) => {
-                alert("ERROR Servidor");
-            });
+    
+    
+    methods:{
+
+    
+
+        viewproduct: function(){
+            var valor = document.getElementById("ID").value;
+            let self = this
+            axios.post("http://127.0.0.1:8000/producto/" + valor)
+                .then((result) => {
+                    
+                    self.name = result.data.name
+                    self.price = result.data.price
+                    self.is_offer = result.data.is_offer
+                })
+                .catch((error) => {
+                    alert("ERROR Servidor");
+                });
+        },
     }
 
 }
@@ -49,7 +82,7 @@ export default {
     }
 
     #UserProduct h2{
-        font-size: 50px;
+        font-size: 40px;
         color: #283747;
     }
     #UserProduct span{
