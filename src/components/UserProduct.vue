@@ -55,7 +55,7 @@ export default {
         viewproduct: function(){
             var valor = document.getElementById("ID").value;
             let self = this
-            axios.post("http://127.0.0.1:8000/producto/" + valor)
+            axios.post(""https://tienda-api23.herokuapp.com/producto/" + valor)
                 .then((result) => {
                     
                     self.name = result.data.name
